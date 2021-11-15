@@ -1,5 +1,6 @@
 from fastapi import FastAPI
-from google.oauth import Autenticacao
+from starlette.responses import RedirectResponse
+from google.oauth import Autenticacao, OAuthInfo
 
 app = FastAPI()
 
@@ -8,4 +9,14 @@ app = FastAPI()
 def home():
     aut = Autenticacao("secrets/client_secret.json")
     creds = aut.autentica_por_secrets_file()
-    return {"Hello": creds}
+    response = RedirectResponse(url=creds)
+    return response
+
+
+@app.get("/v1/google-connector/authorized")
+async def callback_oauth(code: str = "", state: str = "", error: str = ""):
+    aut = Autenticacao("secrets/client_secret.json")
+    credentials = aut.tratamento_callback(code, state, error)
+    oauth_info = OAuthInfo(credentials)
+    info_usuario = oauth_info.captura_info_usuario()
+    return info_usuario
