@@ -1,14 +1,13 @@
 from google_auth_oauthlib.flow import InstalledAppFlow
 from googleapiclient.discovery import build
-
+from base.base import configuracao
 
 class Autenticacao:
 
     def __init__(self, caminho_arquivo):
         self.caminho_arquivo = caminho_arquivo
-        self.SCOPES = ['openid', 'https://www.googleapis.com/auth/userinfo.email',
-                       'https://www.googleapis.com/auth/userinfo.profile']
-        self.redirect_url = "http://127.0.0.1:8080/v1/google-connector/authorized"
+        self.SCOPES = configuracao()["GOOGLE"]["SCOPES"]
+        self.redirect_url = configuracao()["APP"]["ROOT_URL"] + configuracao()["GOOGLE"]["REDIRECT_URL"]
 
     def autentica_por_secrets_file(self):
         flow = InstalledAppFlow.from_client_secrets_file(

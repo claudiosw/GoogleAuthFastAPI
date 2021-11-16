@@ -1,15 +1,16 @@
 from fastapi import FastAPI
 from starlette.responses import RedirectResponse
 from google.oauth import Autenticacao, OAuthInfo
+from base.base import configuracao
 
 app = FastAPI()
 
 
 @app.get("/")
 def home():
-    aut = Autenticacao("secrets/client_secret.json")
-    creds = aut.autentica_por_secrets_file()
-    response = RedirectResponse(url=creds)
+    aut = Autenticacao(configuracao()["GOOGLE"]["CLIENT_SECRETS"])
+    authorization_url = aut.autentica_por_secrets_file()
+    response = RedirectResponse(url=authorization_url)
     return response
 
 

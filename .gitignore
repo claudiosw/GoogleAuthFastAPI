@@ -139,5 +139,7 @@ dmypy.json
 cython_debug/
 
 
+# Nossos arquivos
 # Secrets
 secrets/*.*
+configuracao.yaml
