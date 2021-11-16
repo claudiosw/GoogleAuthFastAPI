@@ -1,0 +1,7 @@
+APP:
+  ROOT_URL: 'http://127.0.0.1:8080'
+GOOGLE:
+  SCOPES:  ['openid', 'https://www.googleapis.com/auth/userinfo.email',
+            'https://www.googleapis.com/auth/userinfo.profile']
+  CLIENT_SECRETS: 'secrets/client_secret.json'
+  REDIRECT_URL: '/v1/google-connector/authorized'

@@ -1,7 +1,11 @@
 # GoogleAuthFastAPI
 
 ## Preparativos
-1. Instale as dependências
+0. Clone o repositório
+```
+git clone https://github.com/claudiosw/GoogleAuthFastAPI.git
+```
+1. Instale as dependências (recomendo utilizar um ambiente virtual)
 ```
 pip install -r requirements.txt
 ```
